@@ -2,10 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script defer rel="index.js"></script>
+    <title>Task List</title>
+    <script type = "module" defer src="index.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2>Add Task</h2>
+            <form id="task-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="description">Description:</label>
+                <textarea id="description" required></textarea>
+                <button type="submit">Add</button>
+                <button id = "cancel" type="reset">cancel</button>
+            </form>
+        </div>
+    </div>
 
+    <div class="filter-sort-container">
+        <div class="filters">
+            <label for="filter">Filter:</label>
+            <select id="filter">
+                <option value="all">All</option>
+                <option value="completed">Completed</option>
+                <option value="incomplete">Incomplete</option>
+            </select>
+        </div>
+        <div class="sort">
+            <label for="sort">Sort:</label>
+            <select id="sort">
+                <option value="date">Date</option>
+                <option value="name">Name</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="taskList"></div>
+    <button id="addTaskButton">Add Task</button>
 </body>
 </html>
