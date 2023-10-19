@@ -103,7 +103,7 @@ class Task{
             const newStatus = statusSelect.value === "completed";
             this.setStatus = newStatus;
             arrTask.updateTaskStatus(this,newStatus);
-            taskElement.querySelector("p:nth-child(5)").textContent = `Status: ${newStatus ? "Completed" : "Incomplete"}`;
+            taskElement.querySelector("p:nth-child(2)").textContent = `Status: ${newStatus ? "Completed" : "Incomplete"}`;
         });
 
         const taskName = taskElement.querySelector(".taskName");
