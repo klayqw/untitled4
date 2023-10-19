@@ -74,7 +74,9 @@ class Task{
         console.log(this.#name);
         taskElement.innerHTML = `
                     <h2 class="taskName">Name: ${this.#name}</h2>                  
-                    <p>Status: ${this.#status ? "Completed" : "Incomplete"}</p>
+                     <p class="taskStatus ${this.#status ? 'taskCompleted' : 'taskIncomplete'}">
+                     Status: ${this.#status ? "Completed" : "Incomplete"}
+                    </p>
                     <button class="deleteTaskButton">Delete</button>
                     <button class="updateTaskButton">Update</button>
                     <label for="${this.#id}_status">Change Status:</label>
@@ -103,13 +105,16 @@ class Task{
             const newStatus = statusSelect.value === "completed";
             this.setStatus = newStatus;
             arrTask.updateTaskStatus(this,newStatus);
+            const statusElement = taskElement.querySelector(".taskStatus");
+            statusElement.classList.remove("taskCompleted", "taskIncomplete");
+            statusElement.classList.add(newStatus ? "taskCompleted" : "taskIncomplete");
             taskElement.querySelector("p:nth-child(2)").textContent = `Status: ${newStatus ? "Completed" : "Incomplete"}`;
         });
 
         const taskName = taskElement.querySelector(".taskName");
 
         taskName.addEventListener("dblclick", () => {
-            window.location.href = `/details/details.html`;
+            window.location.href = `/details/details.html?id=${this.#id}`;
 
         });
 
@@ -139,16 +144,6 @@ class TaskList{
         this.#arr.splice(index,1);
         this.saveLocalStorage();
     }
-
-    updateTask(task){
-        let index = this.#arr.findIndex(task.getId);
-        this.#arr[index].setName = task.getName;
-        this.#arr[index].setDesc = task.getDesc;
-        this.#arr[index].setDate = Date.now();
-        this.#arr[index].setStatus = task.getStatus;
-        this.saveLocalStorage();
-    }
-
     updateTaskStatus(task,status){
         let index = this.#arr.findIndex(e => e.getId === task.getId);
         this.#arr[index].setStatus = status;
@@ -168,7 +163,7 @@ class TaskList{
     }
 
     updateArr(){
-        const arrfromlocalstorage = loadfromLocalStorage()
+        const arrfromlocalstorage = this.loadfromLocalStorage()
         this.#arr = arr;
         this.updateHtmlCode();
     }
@@ -257,4 +252,3 @@ taskForm.addEventListener("submit", (e) => {
 
 
 arrTask.updateHtmlCode();
-export default arrTask;

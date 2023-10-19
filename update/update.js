@@ -28,3 +28,11 @@ saveButton.addEventListener('click', () => {
     window.location.href = '../untitled4/index.html';
 
 });
+
+const useOldValuesButton = document.getElementById('useOldValuesButton');
+
+useOldValuesButton.addEventListener('click', () => {
+    nameInput.value = arr[taskindex].name;
+    descInput.value = arr[taskindex].desc;
+    statusInput.checked = arr[taskindex].status;
+});
