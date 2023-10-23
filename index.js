@@ -1,3 +1,6 @@
+import validateName from "./name_regexp.js";
+import validateDescription from "./desc_regexp.js";
+
 class Task{
     #id = "id" + Math.random().toString(16).slice(2);
     #name = "";
@@ -6,10 +9,9 @@ class Task{
     #status = false;
 
     constructor(name="",desc=""){
-
-        this.#date = this.initdate();
         this.#name = name;
         this.#desc = desc;
+        this.#date = this.initdate();
         this.#status = false;
     }
 
@@ -38,7 +40,11 @@ class Task{
     }
 
     set setName(name){
-        this.#name=name;
+        if(validateName(name)){
+            this.#name = name;
+        }else{
+            return false;
+        }
     }
 
     set setDate(date){
@@ -46,7 +52,11 @@ class Task{
     }
 
     set setDesc(desc){
-        this.#desc=desc;
+        if(validateDescription(name)){
+            this.#name = name;
+        }else{
+            return false;
+        }
     }
 
     set setId(id){
@@ -247,7 +257,14 @@ cancel.addEventListener("click", e => {
 taskForm.addEventListener("submit", (e) => {
     e.preventDefault();
     modal.style.display = "none";
+    if(validateName(name.value) === false){
+        return false;
+    }
+    if(validateDescription(desc.value) === false){
+        return false;
+    }
     arrTask.addTask(new Task(name.value,desc.value));
+    
 });
 
 

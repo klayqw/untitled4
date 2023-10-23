@@ -6,7 +6,7 @@ const arr = JSON.parse(localStorage.getItem("task"));
 const taskindex = arr.findIndex(task => task.id === taskId);
 
 button.addEventListener("click", e => {
-    window.location.href = '../untitled4/index.html';
+    window.location.href = '../index.html';
 })
 
 console.log(taskindex);
